@@ -18,6 +18,7 @@ Repositorio de material de estudio para la materia **Bases de Datos 1** de la Un
 
 ## Links a Prácticas Resueltas 
 - [Práctica Nro. 1](https://github.com/JoaquinManuelGonzalez/Base-de-Datos-1/tree/main/practicas/Resoluciones/Practica%201)
+- [Práctica Nro. 2](https://github.com/JoaquinManuelGonzalez/Base-de-Datos-1/blob/main/practicas/Resoluciones/Practica%202/Pr%C3%A1ctica%20Nro.%202.pdf)
 
 <p align="center">
   <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYW5oYnRjbnc5MHFxYnd1bDN3dW02M2JxdXEzN2p1Z2oxdXd4ZjE5NyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/69jvP3VXUYhr3YUYu9/giphy.gif" alt="Como me siento con esta materia" width="600" height="auto" loop>
