@@ -1,0 +1,10 @@
+*.sock
+*.pid
+*.err
+*.cnf
+*.index
+*.ibd
+*.ibdata*
+*.frm
+*.log
+/practicas/Resoluciones/Practica 4/data/
