@@ -29,6 +29,11 @@ BEGIN
         GROUP BY a.patient_id;
     -- Declaro handler para el fin del cursor
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET fin = 1;
+    -- Seguridad ante fallos en la transacción
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+    END;
     -- Obtengo los valores de fecha y usuario actual
     SET fecha_actual = NOW();
     SET usuario_actual = SUBSTRING(CURRENT_USER(), 1, 16);

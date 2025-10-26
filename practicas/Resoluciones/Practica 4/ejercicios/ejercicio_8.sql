@@ -15,33 +15,6 @@ BEGIN
     -- Declaro variables auxiliares
     DECLARE fecha_actual DATETIME;
     DECLARE usuario_actual VARCHAR(16);
-    -- Obtengo los valores de fecha y usuario actual
-    SET fecha_actual = NOW();
-    SET usuario_actual = SUBSTRING(CURRENT_USER(), 1, 16);
-    -- Usamos INSERT ... ON DUPLICATE KEY UPDATE para actualizar o insertar el registro
-    INSERT INTO appointments_per_patient (id_patient, count_appointments, last_update, user)
-    SELECT NEW.patient_id, COUNT(*), fecha_actual, usuario_actual
-    FROM appointment
-    WHERE patient_id = NEW.patient_id
-    ON DUPLICATE KEY UPDATE
-        count_appointments = VALUES(count_appointments),
-        last_update = VALUES(last_update),
-        user = VALUES(user);
-END //
-DELIMITER ;
-
-/*
-
-OTRA VERSIÓN PARA CONSULTAR:
-
-DELIMITER //
-CREATE TRIGGER trg_dsp_de_insertar_appointment
-AFTER INSERT ON appointment
-FOR EACH ROW
-BEGIN
-    -- Declaro variables auxiliares
-    DECLARE fecha_actual DATETIME;
-    DECLARE usuario_actual VARCHAR(16);
     DECLARE cant_citas INT;
     -- Obtengo los valores de fecha y usuario actual
     SET fecha_actual = NOW();
@@ -63,6 +36,34 @@ BEGIN
         INSERT INTO appointments_per_patient (id_patient, count_appointments, last_update, user)
         VALUES (NEW.patient_id, cant_citas, fecha_actual, usuario_actual);
     END IF;
+END //
+DELIMITER ;
+
+
+/*
+
+OTRA VERSIÓN MÁS EFICIENTE PERO ESPECÍFICA DEL MOTOR:
+
+DELIMITER //
+CREATE TRIGGER trg_dsp_de_insertar_appointment
+AFTER INSERT ON appointment
+FOR EACH ROW
+BEGIN
+    -- Declaro variables auxiliares
+    DECLARE fecha_actual DATETIME;
+    DECLARE usuario_actual VARCHAR(16);
+    -- Obtengo los valores de fecha y usuario actual
+    SET fecha_actual = NOW();
+    SET usuario_actual = SUBSTRING(CURRENT_USER(), 1, 16);
+    -- Usamos INSERT ... ON DUPLICATE KEY UPDATE para actualizar o insertar el registro
+    INSERT INTO appointments_per_patient (id_patient, count_appointments, last_update, user)
+    SELECT NEW.patient_id, COUNT(*), fecha_actual, usuario_actual
+    FROM appointment
+    WHERE patient_id = NEW.patient_id
+    ON DUPLICATE KEY UPDATE
+        count_appointments = VALUES(count_appointments),
+        last_update = VALUES(last_update),
+        user = VALUES(user);
 END //
 DELIMITER ;
 

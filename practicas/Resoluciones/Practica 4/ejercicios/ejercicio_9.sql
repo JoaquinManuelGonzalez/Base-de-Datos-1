@@ -23,7 +23,6 @@ BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
         ROLLBACK;
-        RESIGNAL;
     END;
     -- Obtengo la fecha actual
     SET appointment_date = NOW();
